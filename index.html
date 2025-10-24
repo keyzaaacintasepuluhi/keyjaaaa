@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Merawat Kucing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        #cat {
+            font-size: 100px;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Merawat Kucing</h1>
+    <div id="cat">🐱</div>
+    <div>
+        <button onclick="feedCat()">Beri Makan</button>
+        <button onclick="playWithCat()">Bermain</button>
+        <button onclick="cleanCat()">Bersihkan</button>
+    </div>
+    <div id="status">
+        <p>Kesehatan: <span id="health">50</span></p>
+        <p>Kebahagiaan: <span id="happiness">50</span></p>
+    </div>
+
+    <script>
+        let health = 50;
+        let happiness = 50;
+
+        function updateStatus() {
+            document.getElementById('health').textContent = health;
+            document.getElementById('happiness').textContent = happiness;
+            if (health <= 0 || happiness <= 0) {
+                alert('Kucingmu sakit! Mulai ulang game.');
+                health = 50;
+                happiness = 50;
+                updateStatus();
+            }
+        }
+
+        function feedCat() {
+            health += 10;
+            happiness += 5;
+            if (health > 100) health = 100;
+            if (happiness > 100) happiness = 100;
+            updateStatus();
+        }
+
+        function playWithCat() {
+            happiness += 15;
+            health -= 5; // Bermain membuat lapar
+            if (happiness > 100) happiness = 100;
+            if (health < 0) health = 0;
+            updateStatus();
+        }
+
+        function cleanCat() {
+            health += 5;
+            happiness += 10;
+            if (health > 100) health = 100;
+            if (happiness > 100) happiness = 100;
+            updateStatus();
+        }
+    </script>
+</body>
+</html>
